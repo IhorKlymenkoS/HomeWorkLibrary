@@ -4,20 +4,20 @@ using System;
 
 namespace UnitTests
 {
-    public class VariablesHelperTests //((5 * a) + (b * b)) / (b - a);
+    public class VariablesHelperTests
     {
         [TestCase(1, 2, 9)]
         [TestCase(2, 1, -11)]
-        [TestCase(-1, 2, 0)]//0,3 3 argm
+        [TestCase(-1, 2, 0.28)]//0,3 3 argm
         [TestCase(1, -2, -3)]
         [TestCase(0, 1, 1)]
         [TestCase(1, 0, -5)]
-        [TestCase(127, 371, 566)] // 566,6 = 566,0
+        [TestCase(127, 371, 566.6)] // 566,6 = 566,0
         public void SolveEquation_WhenANotEqualToB_ShouldCalculateEquation
-            (int a, int b, int expectedResult)
+            (int a, int b, double expectedResult)
         {
-            int actualResult = VariablesHelper.SolveEquation(a, b);
-            Assert.AreEqual(expectedResult, actualResult);
+            double actualResult = VariablesHelper.SolveEquation(a, b);
+            Assert.AreEqual(expectedResult, actualResult, 0.01);
         }
 
         [Test]
@@ -48,12 +48,12 @@ namespace UnitTests
         [TestCase(-10, -10, 1, 0)]
         [TestCase(-10, -9, 1, -1)]
         public void ADividedByB_WhenBNotEqualToZero_ShouldCalculateEquation
-            (int a, int b, int expectedDivided, int expectedremainder)
+            (int a, int b, int expectedDivided, int expectedRemainder)
         {
-            (int actualDivided, int actualremainder)
+            (int, int) actualResult
                 = VariablesHelper.ADividedByB(a, b);
-            Assert.AreEqual(expectedDivided, actualDivided);
-            Assert.AreEqual(expectedremainder, actualremainder);
+
+            Assert.AreEqual((expectedDivided, expectedRemainder), actualResult);
         }
 
         [Test]

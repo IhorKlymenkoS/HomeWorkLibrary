@@ -25,43 +25,37 @@ namespace HomeWorkLibrary
             return result;
         }
 
-       public static double TestT()
+       public static int[] FindAllNumbersDivisibleByA(int a)
         {
-            return 2.42341 * 8.513412;
-        }
-
-       public static void FindAllNumbersDivisibleByA(int a)
-        {
-            if (a==0)
+            if (a == 0)
             {
                 throw new ArgumentException("A should be not equal to zero!");
             }
-            if (a<0)
+            if (a < 0)
             {
                 a *= -1;
             }
 
-            int[] arrayDivisibleByA = new int[1000 / a]; 
+            int[] arrayDivisibleByA = new int[1000 / a];
 
-            for (int i = a; i <= 1000; i += a)
+            for (int i = a, j = 0; i <= 1000; i += a)
             {
-                for (int j = 0; j < arrayDivisibleByA.Length-1; j++)
-                {
-                    arrayDivisibleByA[j] = i;
-                }
+                arrayDivisibleByA[j++] = i;
             }
+
+            return arrayDivisibleByA;
         }
 
-        public static int FindThenumberOfPositiveIntegers(int a)
+        public static int FindTheNumberOfPositiveIntegers(int a)
         {
             if (a <= 0)
             {
                 throw new ArgumentException("A must be greater than zero");
             }
             int n;
-            for (n = 1; n * n < a; ++n) ;
+            for (n = 1; n * n < a; ++n) { }
 
-            return n-1;
+            return n - 1;
         }
 
         public static int FindTheGreatestDivisor(int a)
@@ -109,8 +103,17 @@ namespace HomeWorkLibrary
             return sum;
         }
 
-        static int Task6(int a)
+        public static int BringOutTheNumberOfFibanachi(int a)
         {
+            if (a==1||a==2)
+            {
+                return 1;
+            }
+            if (a < 1)
+            {
+                throw new ArgumentException("A must be greater than zero");
+            }
+
             int fibonacci1 = 1;
             int fibonacci2 = 1;
             int fibonacci3 = 0;
@@ -125,8 +128,22 @@ namespace HomeWorkLibrary
             return fibonacci3;
         }
 
-        static int Task7(int a, int b)
+        public static int FindTheGreatestCommonFactor(int a, int b)
         {
+            if (a < 0 || b<0)
+            {
+                throw new ArgumentException("A and B must be greater than zero");
+            }
+            if (a == 0 && b == 0)
+            {
+                throw new ArgumentException("A and B must be greater than zero");
+            }
+
+            if (b<a)
+            {
+                Swap(ref a, ref b);
+            }
+
             int remainder;
             do
             {
@@ -136,51 +153,69 @@ namespace HomeWorkLibrary
                 {
                     b = remainder;
                 }
+
             } while (remainder != 0);
 
             return b;
         }
 
-        static int Task9(int n)
+        public static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+
+        public static int FindTheNumberOfOddDigits(int a)
         {
             int count = 0;
-
-            while (n != 0)
+            if (a<1)
             {
-                if (n % 10 % 2 == 1)
+                a *= -1;
+            }
+
+            while (a != 0)
+            {
+                if (a % 2 == 1)
                 {
                     ++count;
                 }
 
-                n /= 10;
+                a /= 10;
             }
 
             return count;
         }
 
-        static int Task10(int n)
+        public static int FindTheMirroredNumber(int a)
         {
             int reverse = 0;
             int remainder;
 
-            while (n != 0)
+            while (a != 0)
             {
-                remainder = n % 10;
+                remainder = a % 10;
                 reverse = reverse * 10 + remainder;
-                n /= 10;
+                a /= 10;
             }
+
             return reverse;
         }
 
-        static int Task11(int n)
+        public static int GetNumbersTheSumOfEvenDigitsOfWhichIsMoreThanOdd(int a)
         {
+            if (a <= 1)
+            {
+                throw new ArgumentException("A must be greater than one");
+            }
+
             int odd = 0;
             int even = 0;
-            int nCopy = n;
+            int aCopy = a;
 
-            while (n != 0)
+            while (a != 0)
             {
-                int currentDigit = n % 10;
+                int currentDigit = a % 10;
                 if (currentDigit % 2 == 1)
                 {
                     odd += currentDigit;
@@ -190,20 +225,29 @@ namespace HomeWorkLibrary
                     even += currentDigit;
                 }
 
-                n /= 10;
+                a /= 10;
             }
 
             if (even > odd)
             {
-                return nCopy;
+                return aCopy;
             }
 
             return 0;
         }
 
-        static bool Task12(int a, int b)
+        public static bool FindIfThereAreIdenticalDigitsInNumbers(int a, int b)
         {
             bool result = false;
+
+            if (a<0)
+            {
+                a *= -1;
+            }
+            if (b < 0)
+            {
+                b *= -1;
+            }
 
             while (a != 0 && !result)
             {
@@ -227,32 +271,6 @@ namespace HomeWorkLibrary
             }
 
             return result;
-        }
-
-        static double Task13(int a)
-        {
-            double sum = 0;
-            double i = 1.0;
-
-            for (i = 50; i >= 1; i--)
-            {
-                sum = (Math.Sqrt(i + sum));
-            }
-
-            return sum;
-        }
-
-        static int Task14(double a)
-        {
-            int n = 1;
-            double sum = 0;
-            do
-            {
-                sum += 1 / n;
-                n++;
-            } while (sum > a);
-
-            return n;
         }
     }
 }

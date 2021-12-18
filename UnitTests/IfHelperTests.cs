@@ -19,12 +19,12 @@ namespace UnitTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
-        [TestCase(1, 1, 1)]
-        [TestCase(-1, 1, 2)]
-        [TestCase(1, -1, 4)]
-        [TestCase(-1, -1, 3)]
-        public void GetQuarter_When_XAndYNotEqualToZero_GetQuarter
-    (int x, int y, int expectedResult)
+        [TestCase(4, 9, 1)]
+        [TestCase(-2, 8, 2)]
+        [TestCase(7, -5, 4)]
+        [TestCase(-6, -3, 3)]
+        public void GetQuarter_WhenXAndYNotEqualToZero_GetQuarter
+            (int x, int y, int expectedResult)
         {
             int actualResult = IfHelper.GetQuarter(x, y);
             Assert.AreEqual(expectedResult, actualResult);
@@ -32,8 +32,9 @@ namespace UnitTests
 
         [TestCase(1, 0)]
         [TestCase(0, 1)]
+        [TestCase(0, 0)]
         public void GetQuarter_When_XOrYEqualToZero_ShouldThrowArgumentExeption
-(int x, int y)
+            (int x, int y)
         {
             try
             {
@@ -48,36 +49,21 @@ namespace UnitTests
             Assert.Fail();
         }
 
-        [Test]
-        public void GetQuarter_When_XAndYEqualToZero_ShouldThrowArgumentExeption()
-        {
-            try
-            {
-                IfHelper.GetQuarter(0, 0);
-            }
-            catch (ArgumentException ex)
-            {
-                Assert.AreEqual("Point on the origin of coordinates", ex.Message);
-                Assert.Pass();
-            }
-
-            Assert.Fail();
-        }
-
         [TestCase(new[] { 3, 2, 1 }, new[] { 1, 2, 3 })]
         [TestCase(new[] { 3, 3, 1 }, new[] { 1, 3, 3 })]
         [TestCase(new[] { 3, -2, 1 }, new[] { -2, 1, 3 })]
         [TestCase(new[] { 2, 1 }, new[] { 1, 2 })]
         [TestCase(new[] { 2 }, new[] { 2 })]
         [TestCase(new int[] { }, new int[] { })]
-        public void SortArray_When_ArrayIsNotNull_ShouldSortArrayInAscendingOrder(int[] array,int[] expectedArrey)
+        public void SortArray_WhenArrayIsNotNull_ShouldSortArrayInAscendingOrder(
+            int[] array,int[] expectedArray)
         {
             IfHelper.SortArray(array);
-            Assert.AreEqual(expectedArrey, array);
+            Assert.AreEqual(expectedArray, array);
         }
 
         [Test]
-        public void SortArray_When_ArrayIsNull_ShouldThrowArgumentException()
+        public void SortArray_WhenArrayIsNull_ShouldThrowArgumentException()
         {
             try
             {
@@ -92,13 +78,14 @@ namespace UnitTests
             Assert.Fail();
         }
 
-        //[TestCase(4,1,1,3)] //??
-        //public void SolveQuadraticEquation_When_DiscriminantIsNotNegativeAndANotEqualToZero_ShouldSolveQuadraticEquation(double a, double b, double c, double expectedResult)
-        //{
-           // (double expectedx1, double? expectedx2) expectedResult;
-           // (double, double?) actualResult = IfHelper.SolveQuadraticEquation(a, b, c);
-           // Assert.AreEqual(expectedResult, actualResult);
-        //}
+        [TestCase(1, -8, 12, 2, 6)]
+        public void SolveQuadraticEquation_When_DiscriminantIsNotNegativeAndANotEqualToZero_ShouldSolveQuadraticEquation
+            (double a, double b, double c, double expectedX1, double expectedX2)
+        {
+            (double, double) actualResult = IfHelper.SolveQuadraticEquation(a, b, c);
+            Assert.IsTrue(actualResult.Item1 == expectedX1 || actualResult.Item2 == expectedX1);
+            Assert.IsTrue(actualResult.Item1 == expectedX2 || actualResult.Item2 == expectedX2);
+        }
 
         [Test]
         public void SolveQuadraticEquation_When_AEqualToZero_ShouldThrowArgumentException()
@@ -135,7 +122,7 @@ namespace UnitTests
         [TestCase(25, "twenty five")]
         [TestCase(30, "trirty ")]
         [TestCase(12, "twelve")]
-        public void ConvertNumberToText_When_NumberIsTwoDigit_ShouldConvertNumberToText(int number,string expectedResult)
+        public void ConvertNumberToText_WhenNumberIsTwoDigit_ShouldConvertNumberToText(int number,string expectedResult)
         {
             string actualResult = IfHelper.ConvertNumberToText(number);
             Assert.AreEqual(expectedResult, actualResult);
@@ -143,7 +130,7 @@ namespace UnitTests
 
         [TestCase(9)]
         [TestCase(748)]
-        public void ConvertNumberToText_When_NumberIsNotTwoDigit_ShouldThrowArgumentException(int number)
+        public void ConvertNumberToText_WhenNumberIsNotTwoDigit_ShouldThrowArgumentException(int number)
         {
             try
             {

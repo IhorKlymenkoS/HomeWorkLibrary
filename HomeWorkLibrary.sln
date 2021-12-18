@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWorkLibrary", "HomeWorkLibrary\HomeWorkLibrary.csproj", "{A21F6DF8-F907-4DA2-9B6E-B52375AC9639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWorkLibrary", "HomeWorkLibrary\HomeWorkLibrary.csproj", "{A21F6DF8-F907-4DA2-9B6E-B52375AC9639}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E7AFDE42-7CAF-4A6F-A06C-4CEBD0F3CEB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E7AFDE42-7CAF-4A6F-A06C-4CEBD0F3CEB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

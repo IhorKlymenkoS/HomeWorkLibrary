@@ -6,9 +6,9 @@ namespace HomeWorkLibrary
 {
     public class VariablesHelper
     {
-        public static int SolveEquation(int a, int b)
+        public static double SolveEquation(int a, int b)
         {
-            if (a==b)
+            if (a == b)
             {
                 throw new ArgumentException("A should be not equal to b!");
             }
@@ -32,6 +32,7 @@ namespace HomeWorkLibrary
 
             int aDividedByB = a / b;
             int remainder = a % b;
+
             return (aDividedByB, remainder);
         }
 

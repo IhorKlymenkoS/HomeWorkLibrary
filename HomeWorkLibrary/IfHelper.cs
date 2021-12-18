@@ -27,10 +27,6 @@ namespace HomeWorkLibrary
 
         public static int GetQuarter(int x, int y)
         {
-            if (x == 0 && y == 0)
-            {
-                throw new ArgumentException("Point on the origin of coordinates");
-            }
             if (x == 0 || y==0)
             {
                 throw new ArgumentException("Point on the coordinate axis");
@@ -82,12 +78,12 @@ namespace HomeWorkLibrary
             }
         }
 
-        public static (double x1, double? x2) SolveQuadraticEquation(double a, double b, double c)
+        public static (double x1, double x2) SolveQuadraticEquation(double a, double b, double c)
         {
             double discriminant = b * b - 4 * a * c;
-            (double x1, double? x2) result; 
+            (double x1, double x2) result;
 
-            if (a==0)
+            if (a == 0)
             {
                 throw new ArgumentException("A should be not equal to zero!");
             }
@@ -100,7 +96,7 @@ namespace HomeWorkLibrary
             else if (discriminant == 0)
             {
                 double x1 = -b / 2 * a;
-                result = (x1, null);
+                result = (x1, x1);
             }
             else
             {
@@ -212,40 +208,19 @@ namespace HomeWorkLibrary
 
         private static string GetSecondDozens(int number)
         {
-            string result = "";
-            switch (number)
+            string result = number switch
             {
-                case 1:
-                    result = "eleven";
-                    break;
-                case 2:
-                    result = "twelve";
-                    break;
-                case 3:
-                    result = "thirteen";
-                    break;
-                case 4:
-                    result = "fourteen";
-                    break;
-                case 5:
-                    result = "fifteen";
-                    break;
-                case 6:
-                    result = "sixteen";
-                    break;
-                case 7:
-                    result = "seventeen";
-                    break;
-                case 8:
-                    result = "eighteen";
-                    break;
-                case 9:
-                    result = "nineteen";
-                    break;
-                default:
-                    result = "ten";
-                    break;
-            }
+                1 => "eleven",
+                2 => "twelve",
+                3 => "thirteen",
+                4 => "fourteen",
+                5 => "fifteen",
+                6 => "sixteen",
+                7 => "seventeen",
+                8 => "eighteen",
+                9 => "nineteen",
+                _ => "ten",
+            };
 
             return result;
         }
